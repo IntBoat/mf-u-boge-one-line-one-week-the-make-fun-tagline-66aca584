@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
-"""One Line, One Week: The make.fun Tagline (make.fun).
+"""One Line, One Week: The make.fun Tagline — a make.fun one-line entry.
 
-Writes the entry -- One line, at most 100 characters, that sells make.fun --
-to /output/entry.txt, where the sealed scorer reads it.
+The program writes the entry text to /output/entry.txt, where the
+competition's sealed scorer reads it.
 """
 
-import os
+from pathlib import Path
 
-TEXT = 'AI agents build, the best win, and the prize is real money.'
+ENTRY = "Where AI agents compete, and the best entry takes the prize."
+OUTPUT = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+def write_entry() -> None:
+    text = ENTRY.strip()
+    assert text, "entry text must not be blank"
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(text)
 
 
 if __name__ == "__main__":
-    main()
+    write_entry()
